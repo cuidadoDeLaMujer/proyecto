@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pago Plan Regular - Prevención Cáncer de Mama</title>
+  <style>
+    /* Mismos estilos que ya tienes */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f7f3f5;
+      color: #333;
+      margin: 0; padding: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    header {
+      background-color: #c2185b;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      font-size: 1.8rem;
+      font-weight: 700;
+      box-shadow: 0 3px 8px rgb(194 24 91 / 0.6);
+    }
+    main {
+      flex-grow: 1;
+      max-width: 600px;
+      margin: 30px auto;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      padding: 30px 25px;
+    }
+    h2 {
+      color: #c2185b;
+      margin-bottom: 15px;
+      text-align: center;
+    }
+    p.subtitle {
+      text-align: center;
+      font-size: 1rem;
+      margin-bottom: 25px;
+      color: #666;
+    }
+    .plans {
+      border: 1px solid #c2185b;
+      border-radius: 10px;
+      padding: 15px;
+      margin-bottom: 30px;
+      background: #fff0f5;
+    }
+    .plan-option {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 10px;
+      border-bottom: 1px solid #d69ac1;
+      cursor: pointer;
+      border-radius: 6px;
+      transition: background-color 0.25s;
+    }
+    .plan-option:last-child {
+      border-bottom: none;
+    }
+    .plan-option:hover {
+      background-color: #fce4f0;
+    }
+    .plan-option input[type="radio"] {
+      margin-right: 15px;
+      accent-color: #c2185b;
+      transform: scale(1.3);
+      cursor: pointer;
+    }
+    .plan-info {
+      flex-grow: 1;
+    }
+    .plan-price {
+      font-weight: 700;
+      color: #c2185b;
+      font-size: 1.1rem;
+      white-space: nowrap;
+    }
+    .methodos-pago {
+      margin-bottom: 30px;
+      display: none;
+    }
+    .methodos-pago h3 {
+      margin-bottom: 10px;
+      color: #c2185b;
+      text-align: center;
+    }
+    .metodo {
+      display: flex;
+      align-items: center;
+      border: 1px solid #c2185b;
+      border-radius: 10px;
+      padding: 12px 15px;
+      margin-bottom: 12px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .metodo:hover {
+      background-color: #fce4f0;
+    }
+    .metodo input[type="radio"] {
+      margin-right: 20px;
+      accent-color: #c2185b;
+      cursor: pointer;
+      transform: scale(1.3);
+    }
+    .metodo label {
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: #5a2e44;
+      cursor: pointer;
+      user-select: none;
+    }
+    .pago-detalle {
+      display: none;
+      border: 1px solid #c2185b;
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 30px;
+      background: #fff0f5;
+      text-align: center;
+    }
+    .pago-detalle img {
+      max-width: 200px;
+      margin-bottom: 15px;
+    }
+    .pago-detalle p {
+      font-weight: 600;
+      color: #5a2e44;
+      margin: 5px 0;
+      font-size: 1.1rem;
+    }
+    button#btnPagar {
+      width: 100%;
+      background-color: #c2185b;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      padding: 15px;
+      font-size: 1.2rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      display: none;
+    }
+    button#btnPagar:disabled {
+      background-color: #d69ac1;
+      cursor: not-allowed;
+    }
+    button#btnCancelar {
+      width: 100%;
+      background-color: #888;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      padding: 12px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: background-color 0.3s ease;
+    }
+    button#btnCancelar:hover {
+      background-color: #555;
+    }
+    .mensaje {
+      margin-top: 25px;
+      padding: 15px;
+      border-radius: 12px;
+      background-color: #dff0d8;
+      color: #3c763d;
+      font-weight: 700;
+      text-align: center;
+      display: none;
+    }
+    footer {
+      background-color: #f5f5f7;
+      text-align: center;
+      padding: 15px 10px;
+      color: #888;
+      font-size: 0.9rem;
+      margin-top: auto;
+    }
+  </style>
+</head>
+<body>
+
+  <header>Plan Regular</header>
+
+  <main>
+    <h2>Elige tu plan</h2>
+    <p class="subtitle">Disfruta de todos los beneficios del Plan Regular. ¡Cancela en cualquier momento!</p>
+
+    <section class="plans" id="plans">
+      <div class="plan-option">
+        <input type="radio" name="plan" id="planMensual" value="mensual" />
+        <div class="plan-info">
+          <label for="planMensual"><strong>Plan Mensual</strong> — 15,99 PEN / mes</label><br/>
+          <small>Pago mensual, cancela cuando quieras</small>
+        </div>
+        <div class="plan-price">15,99 PEN</div>
+      </div>
+      <div class="plan-option">
+        <input type="radio" name="plan" id="planAnual" value="anual" />
+        <div class="plan-info">
+          <label for="planAnual"><strong>Plan Anual</strong> — 12,99 PEN / mes</label><br/>
+          <small>Ahorra 20% pagando 155,88 PEN al año</small>
+        </div>
+        <div class="plan-price">155,88 PEN / año</div>
+      </div>
+    </section>
+
+    <section class="methodos-pago" id="metodosPago">
+      <h3>Elige el método de pago</h3>
+      <div class="metodo">
+        <input type="radio" name="metodoPago" id="yape" value="yape" />
+        <label for="yape">Yape</label>
+      </div>
+      <div class="metodo">
+        <input type="radio" name="metodoPago" id="plin" value="plin" />
+        <label for="plin">Plin</label>
+      </div>
+    </section>
+
+    <section class="pago-detalle" id="detallePago">
+      <img src="" alt="Código QR" id="qrImage" />
+      <p id="nombrePago"></p>
+      <p id="numeroPago"></p>
+    </section>
+
+    <button id="btnPagar" disabled>Confirmar y Pagar</button>
+    <button id="btnCancelar">Ir al inicio</button>
+
+    <div class="mensaje" id="mensajePago">
+      ¡Pago confirmado! Ahora tienes acceso completo al Plan Regular.
+    </div>
+  </main>
+
+  <script>
+    const btnPagar = document.getElementById('btnPagar');
+    const btnCancelar = document.getElementById('btnCancelar');
+    const mensajePago = document.getElementById('mensajePago');
+
+    const planRadios = document.querySelectorAll('input[name="plan"]');
+    const metodoPagoSection = document.getElementById('metodosPago');
+    const metodoRadios = document.querySelectorAll('input[name="metodoPago"]');
+
+    const detallePago = document.getElementById('detallePago');
+    const qrImage = document.getElementById('qrImage');
+    const nombrePago = document.getElementById('nombrePago');
+    const numeroPago = document.getElementById('numeroPago');
+
+    const datosPago = {
+      yape: {
+        qr: '../img/qr.png',
+        nombre: 'Maria López',
+        numero: '987 654 321',
+      },
+      plin: {
+        qr: '../img/qr.png',
+        nombre: 'Juan Vasquez',
+        numero: '978 234 564',
+      }
+    };
+
+    planRadios.forEach(radio => {
+      radio.addEventListener('change', () => {
+        metodoPagoSection.style.display = 'block';
+        detallePago.style.display = 'none';
+        btnPagar.style.display = 'none';
+        btnPagar.disabled = true;
+        metodoRadios.forEach(m => m.checked = false);
+        mensajePago.style.display = 'none';
+      });
+    });
+
+    metodoRadios.forEach(radio => {
+      radio.addEventListener('change', () => {
+        const metodo = radio.value;
+        if (datosPago[metodo]) {
+          qrImage.src = datosPago[metodo].qr;
+          nombrePago.textContent = `Nombre: ${datosPago[metodo].nombre}`;
+          numeroPago.textContent = `Número: ${datosPago[metodo].numero}`;
+          detallePago.style.display = 'block';
+          btnPagar.style.display = 'block';
+          btnPagar.disabled = false;
+          mensajePago.style.display = 'none';
+        }
+      });
+    });
+
+    btnPagar.addEventListener('click', () => {
+      btnPagar.disabled = true;
+      btnPagar.textContent = 'Procesando pago...';
+
+      setTimeout(() => {
+        mensajePago.style.display = 'block';
+        btnPagar.style.display = 'none';
+        detallePago.style.display = 'none';
+        metodoPagoSection.style.display = 'none';
+
+        // Guardar pago confirmado en localStorage para plan regular
+        localStorage.setItem('pagoPlanRegular', 'true');
+
+        setTimeout(() => {
+          window.location.href = '../principal.html'; // Redirige a la página principal
+        }, 1500);
+
+      }, 2000);
+    });
+
+    // Acción del botón pagar
+    btnPagar.addEventListener('click', () => {
+      const usuario = localStorage.getItem('usuario') || 'usuario_default';
+      // Guardar pago en localStorage con clave que identifica el usuario y plan
+      localStorage.setItem(`pago_regular_${usuario}`, 'true');
+
+      mensajePago.style.display = 'block'; // Mostrar mensaje de éxito
+      btnPagar.disabled = true;             // Desactivar botón para evitar doble pago
+    });
+// Acción del botón cancelar (volver al inicio)
+    btnCancelar.addEventListener('click', () => {
+      window.location.href = '../principal.html';
+    });
+
+    // Mostrar métodos de pago automáticamente (porque sólo hay un plan)
+  document.getElementById('metodosPago').style.display = 'block';
+  </script>
+
+</body>
+</html>

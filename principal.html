@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Cáncer de Mama</title>
+<style>
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    background: #f5f5f7;
+    color: #333;
+    margin: 0;
+    padding: 0;
+  }
+  .topbar {
+    background-color: #f5f5f7;
+    color: #5a2e44;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+  }
+  .topbar div {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .topbar a {
+    color: #5a2e44;
+    text-decoration: none;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  header {
+    background-color: #c2185b;
+    color: white;
+    padding: 22px 15px;
+    text-align: center;
+    position: relative;
+  }
+
+  .header-content {
+  max-width: 1100px;
+  margin: auto;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.header-titles {
+  display: flex;
+  flex-direction: column;
+  align-items: center;    /* Centra el título y el eslogan en su área */
+  flex: 1;
+  grid-column: 1;
+}
+
+.header-titles h1 {
+  margin-bottom: 6px;
+  margin-top: 0;
+  font-size: 2.8rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #fff;
+  text-align: center;
+}
+
+.eslogan-header {
+  font-size: 1.25rem;
+  color: #fcdde9;
+  font-weight: 500;
+  letter-spacing: .2px;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  text-align: center;
+}
+
+.logo-header {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%) translateX(40%); /* Saca el logo un poco del borde derecho */
+  width: 90px;
+  height: 80px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(194, 24, 91, 0.17);
+  object-fit: cover;
+  border: 2px solid #f8cadd;
+  z-index: 3;
+}
+ .menu-container {
+  background: #ffeaf3;
+  border-radius: 0 0 14px 14px;
+  box-shadow: 0 4px 10px rgba(216, 132, 165, 0.7);
+  padding: 0;
+  margin: 0 auto 20px auto; /* puedes ajustar el bottom si quieres */
+  max-width: 1100px;
+  display: flex;
+  justify-content: flex-start;
+  min-height: 50px;
+}
+
+.menu-nav {
+  display: flex;
+  gap: 0;
+  margin-right: 30px;
+}
+
+.menu-btn {
+  background: none;
+  color: #c2185b;
+  border: none;
+  border-right: 1px solid #f3e5f5;
+  border-radius: 0; /* Esquinas cuadradas */
+  padding: 0 32px;
+  font-size: 16px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s;
+  cursor: pointer;
+  box-shadow: none;
+  outline: none;
+  display: flex;
+  align-items: center;
+  min-height: 45px; /* Igual que el contenedor */
+}
+.menu-btn:last-child {
+  border-right: none;
+}
+.menu-btn.active, .menu-btn:hover {
+  background:#fce4ef;
+  color: #7a0f3e;
+  border-radius: 0; /* Fondo cuadrado */
+}
+
+  main {
+    padding: 10px 20px;
+    background-color: #f7f3f5;
+    max-width: 1100px;
+    margin: auto;
+    margin-top: 0;
+  }
+  .dynamic-content {
+    margin-bottom: 32px;
+    margin-top: 0;
+    min-height: 160px;
+  }
+  
+  .team-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 18px 22px;
+    margin-top: 8px;
+  }
+  .team-member {
+    background: #fdf1f5;
+    border-radius: 10px;
+    padding: 15px 10px 10px 10px;
+    width: 255px;
+    height: 215px;
+    box-sizing: border-box;
+    box-shadow: 0 2px 6px rgba(194, 24, 91, 0.5);
+    text-align: center;
+    transition: box-shadow 0.2s;
+  }
+  .team-member img {
+    width: 100px;      /* antes: 65px */
+    height: 100px;     /* antes: 65px */
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #c2185b33;
+    margin-bottom: 7px;
+    margin-top: 2px;
+}
+  .team-member .name {
+    font-weight: 600;
+    color: #c2185b;
+    font-size: 16px;
+    margin-bottom: 2px;
+  }
+  .team-member .role {
+    font-size: 15px;
+    color: #666;
+    margin-bottom: 2px;
+  }
+
+  .team-member .email a {
+  color: #a0144b;
+  text-decoration: underline;
+  font-weight: 500;
+  font-size: 13px;
+  word-break: break-all;
+}
+.team-member .email a:hover {
+  color: #c2185b;
+}
+  .plans {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: nowrap;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  .card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    padding: 25px;
+    width: 300px;
+    transition: transform 0.3s;
+  }
+  .card:hover {
+    transform: translateY(-5px);
+  }
+  .card h2 {
+    margin-top: 0;
+    color: #c2185b;
+    font-size: 24px;
+  }
+  .card ul {
+    list-style: none;
+    padding-left: 0;
+    font-size: 16px;
+  }
+  .card ul li {
+    margin-bottom: 10px;
+  }
+  .card.basico ul li a {
+    color: #333;
+    pointer-events: auto;
+    text-decoration: none;
+  }
+  .card.basico ul li a:hover {
+    color: #c2185b;
+  }
+  .card.regular ul li a,
+  .card.premium ul li a {
+    color: gray;
+    pointer-events: none;
+    text-decoration: none;
+    cursor: default;
+  }
+  .card.regular ul li a.enabled,
+  .card.premium ul li a.enabled {
+    color: #333;
+    pointer-events: auto;
+    cursor: pointer;
+  }
+  .card.regular ul li a.enabled:hover,
+  .card.premium ul li a.enabled:hover {
+    color: #c2185b;
+  }
+  button {
+    background-color: #c2185b;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-top: 10px;
+    transition: background-color 0.3s;
+  }
+  button.adquirido {
+    background-color: #7a0f3e;
+    cursor: default;
+  }
+  .details {
+    display: none;
+    margin-top: 40px;
+    padding: 25px;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    max-width: 100%;
+    margin-left: 0;
+  }
+ 
+.details h2 {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  color: #c2185b;
+  font-size: 20px;
+  margin-top: 0;
+  margin-bottom: 16px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+.details p {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  font-size: 15px;
+  text-align: justify;
+  color: #5a2e44;
+  line-height: 1.6;
+  margin: 0;
+}
+.details strong, .details b {
+  color: #a0144b;
+  font-weight: 600;
+}
+
+  @media (max-width: 900px) {
+    .plans {
+      flex-direction: column;
+      align-items: center;
+    }
+    .menu-container {
+      max-width: 100vw;
+    }
+    .menu-nav {
+      width: 100vw;
+      margin-right: 0;
+    }
+  }
+  @media (max-width: 700px) {
+    header {
+      padding-bottom: 40px;
+    }
+    .menu-container {
+      max-width: 100vw;
+      min-width: 0;
+      margin-left: 0;
+      margin-right: 0;
+    }
+    .menu-nav {
+      width: 100vw;
+      font-size: 15px;
+      justify-content: flex-end;
+    }
+    .card {
+      width: 95vw;
+      max-width: 370px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <span id="datetime">jueves, 22 de mayo de 2025 - 14:09:13</span>
+  <div>
+    <span>Bienvenid@: <strong id="username">Usuario</strong></span>
+    <a href="#" id="logout" onclick="cerrarSesion()">Cerrar sesión</a>
+  </div>
+</div>
+
+<header>
+  <div class="header-content">
+    <div class="header-titles">
+      <h1>Rosa Vida</h1>
+      <div class="eslogan-header">Empoderamiento y prevención contra el cáncer de mama</div>
+    </div>
+    <img src="img/logo.jpeg" alt="Logo Cáncer de Mama" class="logo-header">
+  </div>
+</header>
+
+
+<div class="menu-container">
+  <nav class="menu-nav">
+    <button class="menu-btn active" id="planesBtn" onclick="mostrarMenu('planes')">Nuestros planes</button>
+    <button class="menu-btn" id="equipoBtn" onclick="mostrarMenu('equipo')">Conoce nuestro equipo</button>
+  </nav>
+</div>
+
+<main>
+  <section class="dynamic-content" id="dynamicContent"></section>
+  <section class="plans" id="cardsSection">
+    <!-- Plan Básico -->
+    <div class="card basico">
+      <h2>🩷 Plan Básico</h2>
+      <ul>
+        <li><a href="basico/educacion.html">Educación sobre el cáncer</a></li>
+        <li><a href="basico/autoexploracion.html">Guías de autoexploración</a></li>
+        <li><a href="basico/articulos.html">Artículos de salud</a></li>
+        <li><a href="basico/mitos_realidades.html">Sección mitos y realidades</a></li>
+      </ul>
+      <button onclick="mostrar('basico')">Ver más</button>
+    </div>
+    <!-- Plan Regular -->
+    <div class="card regular">
+      <h2>🩺 Plan Regular</h2>
+      <ul>
+        <li><a href="regular/consulta_virtual.html" class="link-regular" onclick="verificarAcceso(event)">Consulta virtual mensual</a></li>
+        <li><a href="regular/chatbot.html" class="link-regular" onclick="verificarAcceso(event)">Chatbot informativo</a></li>
+      </ul>
+      <button id="btn-regular" onclick="redirigirPago('regular')">Adquirir</button>
+      <button onclick="mostrar('regular')">Ver más</button>
+    </div>
+    <!-- Plan Premium -->
+    <div class="card premium">
+      <h2>🌟 Plan Premium</h2>
+      <ul>
+        <li><a href="premium/atencion.html" class="link-premium" onclick="verificarAcceso(event)">Atención personalizada</a></li>
+        <li><a href="premium/sesiones_emocionales.html" class="link-premium" onclick="verificarAcceso(event)">Sesiones de apoyo emocional</a></li>
+      </ul>
+      <button id="btn-premium" onclick="redirigirPago('premium')">Adquirir</button>
+      <button onclick="mostrar('premium')">Ver más</button>
+    </div>
+  </section>
+
+  <!-- Detalles -->
+  <section id="basico" class="details" style="display:none;">
+    <h2>🩷 Detalles del Plan Básico</h2>
+    <p>El <strong>Plan Básico</strong> es totalmente gratuito y está diseñado para quienes desean comenzar a informarse y cuidar su salud. Ofrece acceso a materiales educativos, guías prácticas para la autoexploración mamaria, artículos de salud y una sección dedicada a desmentir mitos comunes sobre el cáncer de mama. Ideal para quienes buscan información confiable y herramientas sencillas de prevención desde casa. <br>Además, el contenido de este plan se actualiza periódicamente para que siempre cuentes con la información más reciente y relevante.</p>
+  </section>
+  <section id="regular" class="details" style="display:none;">
+    <h2>🩺 Detalles del Plan Regular</h2>
+    <p>El <strong>Plan Regular</strong> incluye todos los beneficios del Plan Básico, sumando acompañamiento profesional mediante consultas virtuales mensuales. Además, tendrás acceso a un chatbot informativo disponible para resolver tus dudas en cualquier momento. Es perfecto para quienes desean un seguimiento periódico y asesoría directa.</p>
+  </section>
+  <section id="premium" class="details" style="display:none;">
+    <h2>🌟 Detalles del Plan Premium</h2>
+    <p>El <strong>Plan Premium</strong> ofrece la experiencia más completa, se brinda atención personalizada y sesiones de apoyo emocional con profesionales. Está pensado para quienes desean un acompañamiento integral, tanto en el aspecto médico como emocional.</p>
+  </section>
+</main>
+
+<script>
+  const usuario = localStorage.getItem('usuario') || 'Usuario';
+  document.getElementById('username').textContent = usuario;
+
+  // Datos del equipo
+  const equipo = [
+    {
+      nombre: "Arista Bermúdez, Gina",
+      rol: "Enfermera",
+      email: "Ginacesi.98@gmail.com",
+      foto: "img/foto01.jpeg"
+    },
+    {
+      nombre: "Castañeda Cruz, Nayeli",
+      rol: "Enfermera",
+      email: "ncastanedacr@ucvvirtual.edu.pe",
+      foto: "img/foto05.jpeg"
+    },
+    {
+      nombre: "Chigne Navarro, Gina",
+      rol: "Enfermera",
+      email: "ginachignenavarro@gmail.com",
+      foto: "img/foto03.jpeg"
+    },
+    {
+      nombre: "Guevara Sánchez, Clemifer",
+      rol: "Enfermera",
+      email: "Clemiyami@gmail.com",
+      foto: "img/foto02.jpeg"
+    },
+    {
+      nombre: "Guarniz De La Cruz, Gloria",
+      rol: "Enfermera",
+      email: "glorianicolguarnizdelacruz@gmail.com",
+      foto: "img/foto04.jpeg"
+    }
+  ];
+function mostrarMenu(tipo) {
+  document.getElementById('planesBtn').classList.remove('active');
+  document.getElementById('equipoBtn').classList.remove('active');
+  const contentDiv = document.getElementById('dynamicContent');
+  const cardsSection = document.getElementById('cardsSection');
+  document.querySelectorAll('.details').forEach(sec => sec.style.display = 'none');
+  if (tipo === 'equipo') {
+    document.getElementById('equipoBtn').classList.add('active');
+    cardsSection.style.display = "none";
+    document.querySelectorAll('.details').forEach(sec => sec.style.display = 'none');
+    let html = `
+      <div class="team-row" style="display: flex; justify-content: center; gap: 30px; margin-bottom: 25px;">
+    `;
+    // Primeros 3 arriba
+    equipo.slice(0, 3).forEach(miembro => {
+      html += `
+        <div class="team-member">
+          <img src="${miembro.foto}" alt="${miembro.nombre}">
+          <div class="name">${miembro.nombre}</div>
+          <div class="role">${miembro.rol}</div>
+          <div class="email"><a href="mailto:${miembro.email}">${miembro.email}</a></div>
+        </div>
+      `;
+    });
+    html += '</div>';
+
+    // Segunda fila (2 abajo)
+    if (equipo.length > 3) {
+      html += `<div class="team-row" style="display: flex; justify-content: center; gap: 30px;">`;
+      equipo.slice(3, 5).forEach(miembro => {
+        html += `
+          <div class="team-member">
+            <img src="${miembro.foto}" alt="${miembro.nombre}">
+            <div class="name">${miembro.nombre}</div>
+            <div class="role">${miembro.rol}</div>
+            <div class="email"><a href="mailto:${miembro.email}">${miembro.email}</a></div>
+          </div>
+        `;
+      });
+      html += '</div>';
+    }
+
+    contentDiv.innerHTML = html;
+    contentDiv.style.display = "block";
+  } else if (tipo === 'planes') {
+    document.getElementById('planesBtn').classList.add('active');
+    contentDiv.innerHTML = "";
+    contentDiv.style.display = "none";
+    cardsSection.style.display = "flex";
+  }
+}
+
+  // MOSTRAR DETALLES DE PLAN: se muestran debajo de los cards, NO oculta los planes
+  function mostrar(id) {
+    document.querySelectorAll('.details').forEach(sec => sec.style.display = 'none');
+    const s = document.getElementById(id);
+    if (s) s.style.display = 'block';
+  }
+
+  function verificarAcceso(event) {
+    const pagoRegular = localStorage.getItem(`pago_regular_${usuario}`) === 'true';
+    const pagoPremium = localStorage.getItem(`pago_premium_${usuario}`) === 'true';
+    const link = event.currentTarget;
+    if (link.classList.contains('link-regular') && !pagoRegular && !pagoPremium) {
+      alert('Debes adquirir el Plan Regular para acceder a este contenido.');
+      event.preventDefault();
+    } else if (link.classList.contains('link-premium') && !pagoPremium) {
+      alert('Debes adquirir el Plan Premium para acceder a este contenido.');
+      event.preventDefault();
+    }
+  }
+
+  function redirigirPago(plan) {
+    if (plan === 'regular') {
+      window.location.href = 'regular/pago_regular.html';
+    } else if (plan === 'premium') {
+      window.location.href = 'premium/pago_premium.html';
+    }
+  }
+
+  function actualizarEstadoPlanes() {
+    const pagoRegular = localStorage.getItem(`pago_regular_${usuario}`) === 'true';
+    const pagoPremium = localStorage.getItem(`pago_premium_${usuario}`) === 'true';
+    const btnRegular = document.getElementById('btn-regular');
+    const btnPremium = document.getElementById('btn-premium');
+    if (pagoRegular || pagoPremium) {
+      btnRegular.textContent = 'Adquirido';
+      btnRegular.classList.add('adquirido');
+      btnRegular.disabled = true;
+      document.querySelectorAll('.link-regular').forEach(link => {
+        link.classList.add('enabled');
+        link.style.pointerEvents = 'auto';
+        link.style.color = '#333';
+        link.removeAttribute('aria-disabled');
+        link.removeAttribute('tabindex');
+      });
+    }
+    if (pagoPremium) {
+      btnPremium.textContent = 'Adquirido';
+      btnPremium.classList.add('adquirido');
+      btnPremium.disabled = true;
+      document.querySelectorAll('.link-premium').forEach(link => {
+        link.classList.add('enabled');
+        link.style.pointerEvents = 'auto';
+        link.style.color = '#333';
+        link.removeAttribute('aria-disabled');
+        link.removeAttribute('tabindex');
+      });
+    }
+  }
+
+  window.addEventListener('load', () => {
+    actualizarEstadoPlanes();
+    mostrarMenu('planes');
+  });
+
+  function cerrarSesion() {
+    localStorage.removeItem("sesionActiva");
+    localStorage.removeItem(`pago_regular_${usuario}`);
+    localStorage.removeItem(`pago_premium_${usuario}`);
+    localStorage.removeItem("usuario");
+    window.location.href = "index.html";
+  }
+
+  function actualizarFechaHora() {
+    const span = document.getElementById("datetime");
+    const ahora = new Date();
+    const dias = ["domingo", "lunes", "martes", "miércoles", "jueves", "viernes", "sábado"];
+    const meses = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"];
+    const diaSemana = dias[ahora.getDay()];
+    const dia = ahora.getDate().toString().padStart(2, '0');
+    const mes = meses[ahora.getMonth()];
+    const año = ahora.getFullYear();
+    const hora = ahora.getHours().toString().padStart(2, '0');
+    const minuto = ahora.getMinutes().toString().padStart(2, '0');
+    const segundo = ahora.getSeconds().toString().padStart(2, '0');
+    span.textContent = `${diaSemana}, ${dia} de ${mes} de ${año} - ${hora}:${minuto}:${segundo}`;
+  }
+  setInterval(actualizarFechaHora, 1000);
+  actualizarFechaHora();
+</script>
+
+</body>
+</html>

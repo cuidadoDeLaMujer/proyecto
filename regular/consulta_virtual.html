@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Consulta Virtual Mensual - Enfermería Oncológica</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f5f5f7;
+      color: #333;
+      margin: 0;
+      line-height: 1.6;
+    }
+    /* Encabezado */
+    header {
+      background-color: #c2185b;
+      color: white;
+      padding: 25px 20px;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(194, 24, 91, 0.7);
+    }
+    header h1 {
+      margin: 0 0 10px;
+      font-size: 2.8rem;
+      letter-spacing: 1.5px;
+    }
+    header p {
+      font-size: 1.25rem;
+      font-weight: 600;
+      opacity: 0.9;
+    }
+    main {
+      max-width: 700px;
+      margin: 40px auto;
+      background: white;
+      padding: 35px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(194, 24, 91, 0.3);
+    }
+    h2 {
+      color: #c2185b;
+      font-size: 2rem;
+      margin-bottom: 20px;
+      border-bottom: 3px solid #f48fb1;
+      padding-bottom: 8px;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+    }
+    p {
+      font-size: 1.1rem;
+      text-align: center;
+    }
+    .highlight {
+      background-color: #f8bbd0;
+      padding: 10px;
+      border-radius: 10px;
+      text-align: center;
+      font-weight: bold;
+      margin: 30px 0;
+      color: #7a0f3e;
+    }
+    form label {
+      display: block;
+      font-weight: 600;
+      margin-top: 15px;
+    }
+    form input, form select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 6px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+      box-sizing: border-box;
+    }
+    button {
+      background-color: #c2185b;
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      margin-top: 30px;
+      width: 100%;
+      font-size: 1.1rem;
+      border-radius: 10px;
+      cursor: pointer;
+      box-shadow: 0 3px 10px rgba(194, 24, 91, 0.3);
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+    button:hover {
+      background-color: #a3164f;
+      transform: translateY(-2px);
+    }
+    .link-calendar {
+      text-align: center;
+      margin-top: 20px;
+    }
+    .link-calendar a {
+      color: #c2185b;
+      font-weight: 700;
+      text-decoration: none;
+      font-size: 1.1rem;
+    }
+    .link-calendar a:hover {
+      text-decoration: underline;
+    }
+    /* Tabla consultas agendadas */
+    #consultasAgendadas {
+      margin-top: 30px;
+      width: 100%;
+      border-collapse: collapse;
+      display: none;
+    }
+    #consultasAgendadas th, #consultasAgendadas td {
+      border: 1px solid #ccc;
+      padding: 10px;
+      text-align: center;
+      font-size: 1rem;
+    }
+    #consultasAgendadas th {
+      background-color: #d49ab7;
+      color: #7a0f3e;
+    }
+    .btn-eliminar {
+      background-color: #d32f2f;
+      padding: 4px 8px;
+      font-size: 14px;
+      border: none;
+      border-radius: 6px;
+      color: white;
+      cursor: pointer;
+      font-weight: 500;
+      transition: background-color 0.3s ease;
+      display: block;
+      margin: 0 auto;
+      width: fit-content;
+    }
+
+    .btn-eliminar:hover {
+      background-color: #9a2323;
+    }
+
+    #btnMostrarConsultas {
+      background-color: #880e4f;
+      color: #ffffff;
+      border: none;
+      padding: 12px 25px;
+      margin-top: 20px;
+      width: 100%;
+      font-size: 1.1rem;
+      border-radius: 10px;
+      cursor: pointer;
+      box-shadow: 0 3px 10px rgba(194, 24, 91, 0.2);
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    #btnMostrarConsultas:hover {
+      background-color: #c2185b;
+      transform: translateY(-2px);
+    }
+
+    #consultasAgendadas td {
+      background-color: #fce4ec;
+      color: #4a0c2f;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Reserva tu consulta virtual</h1>
+    <p>Tu salud es nuestra prioridad</p>
+  </header>
+
+  <main>
+    <p>
+      Nuestro equipo de enfermería te acompaña cada mes.
+    </p>
+
+    <div class="highlight">
+      🩺 Próxima consulta: <strong>04 de junio</strong>
+    </div>
+
+    <form id="consultaForm">
+      <label for="nombre">Nombre completo:</label>
+      <input type="text" id="nombre" name="nombre" required />
+
+      <label for="celular">Número de celular:</label>
+      <input type="tel" id="celular" name="celular" required pattern="\d{9,15}" title="Ingrese un número de celular válido (9 a 15 dígitos)" />
+
+      <label for="dni">DNI:</label>
+      <input type="text" id="dni" name="dni" required pattern="\d{8,10}" title="Ingrese un DNI válido (8 a 10 dígitos)" />
+
+      <label for="enfermera">Selecciona enfermera:</label>
+      <select id="enfermera" name="enfermera" required>
+        <option value="">--Selecciona una--</option>
+        <option value="Arista Bermúdez, Gina">Arista Bermúdez, Gina</option>
+        <option value="Castañeda Cruz, Nayeli">Castañeda Cruz, Nayeli</option>
+        <option value="Guevara Sánchez, Clemifer">Guevara Sánchez, Clemifer</option>
+        <option value="Guarniz De La Cruz, Gloria">Guarniz De La Cruz, Gloria</option>
+        <option value="Chigne Navarro, Gina">Chigne Navarro, Gina</option>
+      </select>
+
+      <label for="hora">Horarios:</label>
+      <select id="hora" name="hora" required>
+        <option value="">--Selecciona una hora--</option>
+      </select>
+
+      <button type="submit">Solicitar consulta</button>
+    </form>
+
+    <button id="btnMostrarConsultas">Consultas Agendadas</button>
+
+    <table id="consultasAgendadas">
+      <thead>
+        <tr>
+          <th>Fecha</th>
+          <th>Hora</th>
+          <th>Enfermera</th>
+          <th>Zoom</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Consultas se agregarán aquí -->
+      </tbody>
+    </table>
+
+    <div class="link-calendar">
+      <a href="../principal.html">⬅️ Volver al inicio</a>
+    </div>
+  </main>
+
+  <script>
+    const consultas = JSON.parse(localStorage.getItem('consultasOnco')) || [];
+
+    const horariosPorEnfermera = {
+      "Arista Bermúdez, Gina": ["09:00", "10:00", "11:00", "14:00","15:00"],
+      "Castañeda Cruz, Nayeli": ["10:00", "11:00", "14:00", "15:00","16:00"],
+      "Guevara Sánchez, Clemifer": ["09:00", "10:00", "15:00", "16:00", "17:00"],
+      "Guarniz De La Cruz, Gloria": ["11:00", "13:00","14:00", "15:00","16:00"],
+      "Chigne Navarro, Gina": ["09:00", "10:00","11:00","14:00","15:00"]
+    };
+
+    const horaSelect = document.getElementById('hora');
+    const enfermeraSelect = document.getElementById('enfermera');
+    const btnMostrarConsultas = document.getElementById('btnMostrarConsultas');
+    const tablaConsultas = document.getElementById('consultasAgendadas').getElementsByTagName('tbody')[0];
+
+    enfermeraSelect.addEventListener('change', () => {
+      const seleccionada = enfermeraSelect.value;
+      const disponibles = horariosPorEnfermera[seleccionada] || [];
+      const ocupadas = consultas
+        .filter(c => c.enfermera === seleccionada && c.fecha === "2025-06-04")
+        .map(c => c.hora);
+
+      horaSelect.innerHTML = '<option value="">--Selecciona una hora--</option>';
+      disponibles.forEach(hora => {
+        if (!ocupadas.includes(hora)) {
+          const option = document.createElement('option');
+          option.value = hora;
+          option.textContent = hora + (parseInt(hora) < 12 ? " AM" : " PM");
+          horaSelect.appendChild(option);
+        }
+      });
+    });
+
+    document.getElementById('consultaForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const nombre = this.nombre.value.trim();
+      const celular = this.celular.value.trim();
+      const dni = this.dni.value.trim();
+      const hora = this.hora.value;
+      const enfermera = this.enfermera.value;
+      const fecha = "2025-06-04";
+
+      consultas.push({
+        nombre,
+        celular,
+        dni,
+        fecha,
+        hora,
+        enfermera,
+        doctor: enfermera,
+        zoomLink: "https://us05web.zoom.us/j/86088695941?pwd=GK1nb3Tij8tFqzFpq3mQ"
+      });
+
+      localStorage.setItem('consultasOnco', JSON.stringify(consultas));
+      alert('Consulta solicitada exitosamente');
+      this.reset();
+      horaSelect.innerHTML = '<option value="">--Selecciona una hora--</option>';
+      mostrarConsultas();
+    });
+
+    function mostrarConsultas() {
+      tablaConsultas.parentElement.style.display = 'table';
+      tablaConsultas.innerHTML = '';
+      if (consultas.length === 0) {
+        tablaConsultas.innerHTML = '<tr><td colspan="5">No hay consultas agendadas.</td></tr>';
+        return;
+      }
+      consultas.forEach((c, index) => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${c.fecha}</td>
+          <td>${c.hora}</td>
+          <td>${c.enfermera}</td>
+          <td><a href="${c.zoomLink}" target="_blank" rel="noopener noreferrer">Enlace Zoom</a></td>
+          <td><button class="btn-eliminar" data-index="${index}">Cancelar</button></td>
+        `;
+        tablaConsultas.appendChild(tr);
+      });
+
+   // Asociar eventos para eliminar
+  document.querySelectorAll('.btn-eliminar').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const idx = parseInt(e.target.dataset.index, 10);
+      const seguro = confirm('¿Está seguro de cancelar esta consulta?');
+      if (seguro) {
+        consultas.splice(idx, 1);
+        localStorage.setItem('consultasOnco', JSON.stringify(consultas));
+        mostrarConsultas();
+      }
+    });
+  });
+
+    }
+    
+
+    btnMostrarConsultas.addEventListener('click', mostrarConsultas);
+  </script>
+</body>
+</html>

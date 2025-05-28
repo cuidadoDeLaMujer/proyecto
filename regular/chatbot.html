@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Chatbot - Cáncer de Mama</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      background-color: #fafafa;
+      color: #444;
+      line-height: 1.5;
+      font-size: 14px;
+    }
+    header {
+      background-color: #c2185b;
+      color: white;
+      padding: 22px 15px;
+      text-align: center;
+      box-shadow: 0 3px 8px rgba(194, 24, 91, 0.7);
+      border-radius: 0 0 12px 12px;
+      margin-bottom: 40px;
+    }
+    header h1 {
+      margin: 0 0 8px;
+      font-size: 2.2rem;
+      letter-spacing: 1px;
+      font-weight: 700;
+    }
+    header p {
+      font-size: 1rem;
+      font-weight: 600;
+      opacity: 0.85;
+      margin: 0;
+      font-style: italic;
+    }
+    main {
+      max-width: 750px;
+      margin: 0 auto 60px;
+      padding: 0 20px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+      padding: 25px 25px 30px;
+    }
+    .chat-box {
+      height: 320px;
+      overflow-y: auto;
+      border: 1px solid #ddd;
+      padding: 15px;
+      border-radius: 10px;
+      background: #fafafa;
+      margin-bottom: 20px;
+      font-size: 0.95rem;
+      color: #555;
+      font-weight: 500;
+    }
+    .user, .bot {
+      margin-bottom: 12px;
+      line-height: 1.4;
+    }
+    
+.user {
+  text-align: left;
+  color: #c2185b;
+  font-weight: 600;
+  background: #fde4ef;
+  display: inline-block;
+  max-width: 100%;
+  min-width: 300px;          /* <-- Ajusta aquí el fondo mínimo */
+  padding: 8px 16px 8px 15px;
+  border-radius: 15px;
+  margin-bottom: 12px;
+  margin-top: 8px;
+  box-sizing: border-box;    /* Asegura que el padding se sume al ancho total */
+   font-size: 14px; /* <-- Tamaño de letra (ajusta a tu gusto) */
+   font-family: 'Segoe UI', Arial, Helvetica, sans-serif; /* <-- Tipo de letra */
+}
+    .bot1 {
+      text-align: left;
+      text-align: justify;
+      color: #444;
+      padding: 7px 16px;
+       word-break: break-word;
+    }
+    .bot {
+  text-align: left;
+  color:#444;
+  padding: 7px 16px;
+  margin-left: 5%;   /* MÁS espacio a la izquierda = el mensaje se mueve hacia el centro */
+  word-break: break-word;
+  text-align: justify;
+  font-size: 14px;
+}
+    .input-container {
+      display: flex;
+      gap: 10px;
+    }
+    input[type="text"] {
+      flex-grow: 1;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-weight: 500;
+    }
+    button.send-btn {
+      background-color: #c2185b;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      box-shadow: 0 3px 10px rgba(194, 24, 91, 0.3);
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      user-select: none;
+    }
+    button.send-btn:hover {
+      background-color: #a3164f;
+      transform: translateY(-2px);
+    }
+    
+    .link-calendar {
+      text-align: center;
+      margin-top: 20px;
+    }
+    .link-calendar a {
+      color: #c2185b;
+      font-weight: 700;
+      text-decoration: none;
+      font-size: 1.1rem;
+    }
+    .link-calendar a:hover {
+      text-decoration: underline;
+    }
+
+    .card-chatbot {
+      /* Oculto, ya que la estructura visual ahora es con main directamente */
+      display: none;
+    }
+    .chat-avatar, .chat-title, .chat-desc {
+      /* Oculto por el mismo motivo, pero puedes reactivar si lo deseas */
+      display: none;
+    }
+    ul, ol {
+  margin: 0 0 0 30px; /* o el margen izquierdo que prefieras */
+  padding: 0;
+}
+  @media (max-width: 600px) {
+      main {
+        margin: 20px 15px 50px;
+        padding: 20px;
+      }
+      header h1 {
+        font-size: 1.8rem;
+      }
+      header p {
+        font-size: 0.9rem;
+      }
+      .chat-box {
+        height: 280px;
+        font-size: 0.9rem;
+      }
+      input[type="text"] {
+        font-size: 0.9rem;
+      }
+      button.send-btn {
+        font-size: 0.95rem;
+        padding: 10px 20px;
+      }
+      .chat-footer a button {
+        width: 100%;
+        font-size: 1.1rem;
+        padding: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chatbot Informativo</h1>
+    <p>Resuelve tus dudas sobre <b>cáncer de mama</b> con respuestas claras y confiables</p>
+  </header>
+  <main>
+    <div class="chat-box" id="chatBox">
+      <div class="bot1">🤖 ¡Hola! Soy tu asistente virtual. Pregúntame lo que desees sobre el cáncer de mama: síntomas, prevención, tratamientos, exámenes y más.</div>
+      <i><b><center>Por favor, solo consultas sobre cáncer de mama. Otros temas no serán respondidos.</center></b></i><br></div>
+    </div>
+    <div class="input-container">
+      <input type="text" id="userInput" placeholder="Escribe tu pregunta sobre cáncer de mama..." autocomplete="off" />
+      <button class="send-btn" onclick="sendMessage()">Enviar</button>
+    </div>
+     <div class="link-calendar">
+      <a href="../principal.html">⬅️ Volver al inicio</a>
+    </div>
+   
+  </main>
+  <script>
+    const chatBox = document.getElementById('chatBox');
+    const userInput = document.getElementById('userInput');
+// Base de conocimiento expandida y humanizada
+const KNOWLEDGE = [
+  {
+    keywords: [/que es/i, /definicion/i, /explica/i, /cancer de mama/i],
+    answer: `El cáncer de mama es una enfermedad donde las células del tejido mamario se multiplican de manera anormal y descontrolada, formando un tumor maligno. Aunque es mucho más frecuente en mujeres, también puede presentarse en hombres.
+            Existen distintos tipos y subtipos de cáncer de mama, algunos crecen y se diseminan más rápido que otros. La detección temprana y el tratamiento adecuado mejoran significativamente las probabilidades de curación y calidad de vida.¿Te gustaría saber sobre síntomas, causas, prevención o los tipos de cáncer de mama?`
+  },
+  {
+    keywords: [/sintoma/i, /signos/i, /como saber/i, /detectar/i, /manifestacion/i, /bulto/i],
+    answer: `Los síntomas del cáncer de mama pueden variar o incluso no presentarse en etapas iniciales. Algunos signos de alerta son:
+<ul>
+    <li><b>Bultos en el seno o la axila</b>, duros e indoloros en la mayoría de los casos.</li>
+<li><b>Cambios en el tamaño, forma o apariencia</b> del seno.</li>
+<li><b>Alteraciones en la piel</b> (enrojecimiento, hoyuelos, textura similar a "piel de naranja").</li>
+<li><b>Cambios en el pezón:</b> retracción, dolor, enrojecimiento o secreción anormal, especialmente si es sanguinolenta.</li>
+<li><b>Dolor persistente</b> en el seno o axila.</li></ul>
+Recuerda: <b>no todos los bultos son cáncer</b>, pero siempre es importante consultar con un profesional de salud ante cualquier cambio o síntoma.`
+  },
+  {
+    keywords: [/prevencion/i, /prevenir/i, /evitar/i, /como evitar/i, /alimentos/i, /comida/i],
+    answer: `Si bien no es posible evitar totalmente el cáncer de mama, hay hábitos que ayudan a reducir el riesgo:
+<ul>
+<li>Mantener un peso saludable y llevar una dieta equilibrada, rica en vegetales, frutas, granos integrales y baja en grasas saturadas.</li>
+<li>Hacer ejercicio regularmente.</li>
+<li>Evitar el consumo excesivo de alcohol y no fumar.</li>
+<li>Realizar autoexploraciones mamarias mensuales y chequeos médicos periódicos.</li>
+<li>Amamantar, si es posible, también puede tener un efecto protector.</li><ul>`
+  },
+  {
+    keywords: [/factor|causa|riesgo|hereditari|genetic|mutacion|brca/i],
+    answer: `Algunos factores aumentan el riesgo de cáncer de mama:
+<ul>
+<li>Ser mujer y la edad avanzada.</li>
+<li>Antecedentes familiares (madre, hermana, hija) con cáncer de mama u ovario.</li>
+<li>Mutaciones genéticas hereditarias (BRCA1, BRCA2).</li>
+<li>Menstruación antes de los 12 años o menopausia después de los 55 años.</li>
+<li>No haber tenido hijos o tener el primer embarazo después de los 30 años.</li>
+<li>Exposición a radiación o tratamientos hormonales prolongados.</li>
+<li>Consumo elevado de alcohol o sobrepeso.</li>
+</ul>
+Sin embargo, muchas personas sin estos factores pueden desarrollarlo, y no todas las que los tienen lo padecen.`
+  },
+  {
+    keywords: [/mamografia|examen|prueba|diagnostic|biopsia/i],
+    answer: `La <b>mamografía</b> es una radiografía especial de las mamas que permite detectar lesiones muy pequeñas, incluso antes de que sean palpables.
+Otras pruebas son:
+<ul>
+<li><b>Ecografía mamaria:</b> útil en mujeres jóvenes o con mamas densas.</li>
+<li><b>Resonancia magnética:</b> utilizada en casos específicos.</li>
+<li><b>Biopsia:</b> extracción de una muestra de tejido para analizar si hay células cancerosas.</li>
+</ul>
+Se recomienda una mamografía anual o bianual a partir de los 40 años, o antes si hay antecedentes familiares. Consulta a tu médico sobre el esquema ideal para ti.`
+  },
+  {
+    keywords: [/tratamiento|cura|curar|tratar|quimioterapia|radioterapia|cirugia|mastectomi|lumpectomi|hormonal/i],
+    answer: `El tratamiento depende del tipo, la etapa y las características del cáncer, así como de la salud general de la persona. Suele incluir:
+<ul>
+<li><b>Cirugía:</b> puede ser parcial (lumpectomía) o total (mastectomía); a veces, retiro de ganglios linfáticos.</li>
+<li><b>Radioterapia:</b> utiliza radiación para eliminar células cancerosas.</li>
+<li><b>Quimioterapia:</b> medicamentos que destruyen células cancerosas en todo el cuerpo.</li>
+<li><b>Terapia hormonal:</b> bloquea hormonas que pueden favorecer el crecimiento tumoral.</li>
+<li><b>Terapias dirigidas e inmunoterapia:</b> atacan mecanismos específicos de las células cancerosas.</li>
+</ul>`
+  },
+  {
+    keywords: [/autoexploracion|como palpar|explorar|tocar|auto exploracion/i],
+    answer: `La autoexploración mamaria es un método sencillo para detectar cambios o bultos en los senos.
+<b>¿Cómo hacerla?</b>
+<ol>
+<li>Frente al espejo, observa tus senos con los brazos abajo y luego arriba, buscando cambios en forma, tamaño o piel.</li>
+<li>Palpa ambos senos y axilas con movimientos circulares y suaves con las yemas de los dedos (puedes hacerlo de pie o recostada).</li>
+<li>Hazlo una vez al mes, preferiblemente una semana después de la menstruación.</li>
+</ol>
+<b>Si detectas algo inusual, acude a tu médico.</b> La autoexploración no reemplaza la mamografía, pero ayuda a familiarizarte con tu cuerpo.`
+  },
+  {
+    keywords: [/emocion|miedo|ansiedad|apoyo|psicolog|sentimiento|triste/i],
+    answer: `Recibir un diagnóstico de cáncer de mama puede causar miedo, tristeza, ansiedad o incertidumbre. <b>Es normal sentirte así</b>.
+<b>Recomendaciones:</b>
+<ul>
+<li>Habla sobre tus emociones con familiares, amigos o profesionales de salud mental.</li>
+<li>Participa en grupos de apoyo donde puedas compartir tus experiencias.</li>
+<li>Busca ayuda profesional si te sientes abrumada.</li>
+</ul>
+El apoyo emocional es fundamental para transitar el proceso de tratamiento y recuperación. ¡No estás sola!`
+  },
+  {
+    keywords: [/hombre|varon|masculin/i],
+    answer: `Aunque es mucho menos común, los hombres también pueden desarrollar cáncer de mama porque tienen tejido mamario.
+<b>Síntomas, pruebas y tratamientos son similares a los de las mujeres.</b> Si eres hombre y notas bultos, cambios en el pezón o piel del pecho, consulta a un médico.
+Un diagnóstico temprano mejora las posibilidades de éxito en el tratamiento.`
+  },
+  {
+    keywords: [/tipo|variedad|clasificaci/i, /carcinoma ductal|cd[i|s]/i],
+    answer: `<b>Tipos principales de cáncer de mama:</b>
+<ul>
+<li><b>Carcinoma ductal in situ (CDIS):</b> el más frecuente, limitado a los conductos mamarios.</li>
+<li><b>Carcinoma lobulillar in situ (CLIS):</b> afecta los lobulillos mamarios.</li>
+<li><b>Carcinoma invasivo:</b> puede ser ductal o lobulillar, y puede diseminarse a otras partes del cuerpo.</li>
+</ul>
+Cada tipo responde de manera diferente al tratamiento, por lo que un diagnóstico preciso es fundamental.`
+  },
+  {
+    keywords: [/edad|cuando|a que edad|chequeo|control/i],
+    answer: `<b>Recomendaciones generales:</b>
+<ul>
+<li>Autoexploración mamaria: desde los 20 años, una vez al mes.</li>
+<li>Consulta médica: una vez al año desde los 25-30 años.</li>
+<li>Mamografía: a partir de los 40 años, o antes si hay factores de riesgo.</li>
+</ul>
+Consulta siempre con tu médico cuál es la frecuencia y edad más adecuada para ti.`
+  },
+  {
+    keywords: [/acompañar|familia|apoyar|ser querido|amigo/i],
+    answer: `Acompañar a alguien con cáncer de mama implica:
+<ul>
+<li>Escuchar y respetar sus emociones.</li>
+<li>Ofrecer ayuda práctica, como acompañar a consultas o colaborar en tareas diarias.</li>
+<li>Informarse sobre la enfermedad para comprender mejor sus necesidades.</li>
+<li>Animar a expresar sus sentimientos y buscar apoyo profesional.</li>
+</ul>
+El apoyo emocional es tan importante como el tratamiento médico.`
+  },
+  {
+    keywords: [/sobrevida|pronostico|curacion|supervivencia|expectativa/i],
+    answer: `El pronóstico del cáncer de mama ha mejorado notablemente. <b>La tasa de supervivencia a 5 años es superior al 90% si se detecta en etapas tempranas.</b> El pronóstico depende del tipo de tumor, la etapa, la edad y el estado general de salud.
+La clave es el diagnóstico precoz y el acceso a tratamientos adecuados.`
+  },
+  {
+    keywords: [/saludo|hola|buenas/i],
+    answer: `¡Hola! ¿En qué puedo ayudarte hoy sobre cáncer de mama?`
+  },
+  {
+    keywords: [/gracias|agradecid/i],
+    answer: `¡De nada! Me alegra poder ayudarte. Si tienes otra pregunta sobre cáncer de mama, aquí estoy para ti.`
+  },
+  {
+    keywords: [/adios|chau|hasta luego|nos vemos/i],
+    answer: `¡Hasta luego! Recuerda que puedes volver cuando quieras. Tu salud es lo más importante.`
+  }
+];
+
+// Palabras clave para rechazar temas que no sean de cáncer de mama
+const OUT_OF_SCOPE = [
+  /inteligencia artificial|tecnolog|politic|futbol|clima|presidente|perro|gato|musica|pais|historia|matematic|gpt|openai|modelo|red neuronal|quimica|covid|influenza|diabetes|corazon|riñon|pulmon|computadora|celular|telefono|juego|pelicula|actor|artista|viaje|vacacion|universidad|trabajo|dinero|criptomoneda|bitcoin|cocina|receta/i
+];
+
+
+    function appendMessage(message, sender) {
+      const div = document.createElement('div');
+      div.className = sender;
+      div.innerHTML = message.replace(/\n/g, "<br>");
+      chatBox.appendChild(div);
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    function sendMessage() {
+      let text = userInput.value.trim();
+      if (text === "") return;
+
+      appendMessage(text, 'user');
+      userInput.value = "";
+      userInput.disabled = true;
+      setTimeout(() => {
+        const response = getBotResponse(text);
+        appendMessage(response, 'bot');
+        userInput.disabled = false;
+        userInput.focus();
+      }, 900);
+    }
+
+    function getBotResponse(input) {
+      // Primero, si detecta palabras fuera de tema, rechaza la pregunta
+      for (let out of OUT_OF_SCOPE) {
+        if (out.test(input)) {
+          return `Lo siento, solo puedo responder preguntas sobre <b>cáncer de mama</b>.<br>
+          ¿Tienes dudas sobre síntomas, prevención, tratamientos, apoyo emocional u otros aspectos de esta enfermedad? ¡Estoy aquí para ayudarte!`;
+        }
+      }
+      // Busca respuesta adecuada en la base de conocimiento
+      for (let item of KNOWLEDGE) {
+        for (let k of item.keywords) {
+          if (k.test(input)) {
+            return item.answer;
+          }
+        }
+      }
+        // Si no encuentra respuesta, intenta ser humana
+      return `No tengo información precisa sobre esa consulta.
+      Puedo ayudarte con preguntas sobre:
+      <i>• Síntomas
+      • Edad para hacerce la mamografía
+      • Prevención
+      • Tratamiento,entre otros.</i>`;
+    }
+
+    // Permitir enviar mensaje con Enter
+    userInput.addEventListener("keydown", function(e) {
+      if (e.key === "Enter") {
+        sendMessage();
+      }
+    });
+  </script>
+</body>
+</html>

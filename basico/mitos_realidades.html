@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mitos y Realidades sobre el Cáncer de Mama</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      background-color: #f5f5f7;
+      color: #4a2c3b;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+  header {
+      background-color: #c2185b;
+      color: white;
+      padding: 22px 15px;
+      text-align: center;
+      box-shadow: 0 3px 8px rgba(194, 24, 91, 0.7);
+    }
+    header h1 {
+      margin: 0 0 8px;
+      font-size: 2.2rem;
+      letter-spacing: 1px;
+      font-weight: 700;
+    }
+    header p {
+      font-size: 1rem;
+      font-weight: 600;
+      opacity: 0.85;
+      margin: 0;
+      font-style: italic;
+    }
+
+    main {
+      max-width: 900px;
+      margin: 50px auto 80px;
+      padding: 0 20px;
+    }
+
+    h2 {
+      color: hsl(328, 81%, 29%);
+      font-size: 1.68rem;
+      text-align: center;
+      margin-bottom: 35px;
+      border-bottom: 4px solid #f48fb1;
+      padding-bottom: 12px;
+      font-weight: 900;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      user-select: none;
+    }
+    
+
+    /* Contenedor de mito-realidad */
+    .myr-card {
+      background-color: #fff;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgb(194 24 91 / 0.15);
+      margin-bottom: 30px;
+      padding: 28px 30px 28px 40px;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+    }
+    .myr-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 14px 32px rgb(194 24 91 / 0.35);
+    }
+
+    /* Iconos */
+    .icon {
+      flex-shrink: 0;
+      width: 48px;
+      height: 48px;
+      margin-top: 4px;
+      stroke-width: 2.5;
+      stroke-linejoin: round;
+      stroke-linecap: round;
+      stroke: #c2185b;
+      fill: none;
+      transition: stroke 0.3s ease;
+    }
+
+    .myr-card:hover .icon {
+      stroke: #880e4f;
+    }
+
+    /* Diferenciar mito y realidad con borde y sombra */
+    .mito {
+      border-left: 8px solid #e040fb;
+      box-shadow: 0 8px 20px rgb(224 64 251 / 0.15);
+    }
+    .realidad {
+      border-left: 8px solid #ff4081;
+      box-shadow: 0 8px 20px rgb(255 64 129 / 0.18);
+    }
+
+    /* Texto de mito/realidad */
+    .myr-text {
+      flex: 1;
+    }
+    .myr-text h3 {
+      font-size: 1.3rem;
+      margin: 0 0 14px;
+      color: #880e4f;
+      font-weight: 700;
+      user-select: none;
+    }
+    .myr-text p {
+      font-size: 1.0rem;
+      color: #5c2a44;
+      text-align: justify;
+      margin: 0;
+      line-height: 1.5;
+      letter-spacing: 0.02em;
+      font-weight: 500;
+    }
+
+    /* Destacar palabra “Realidad” y “Mito” */
+    .label {
+      font-weight: 900;
+      font-size: 1.2rem;
+      color: #c2185b;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 8px;
+      user-select: none;
+    }
+    .mito .label {
+      color: #9c27b0;
+    }
+
+ section.button-container {
+      text-align: center;
+      margin-top: 40px;
+    }
+    button {
+      background-color: #c2185b;
+      color: white;
+      padding: 14px 32px;
+      border: none;
+      border-radius: 12px;
+      font-size: 1.25rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 6px 18px rgba(194, 24, 91, 0.4);
+    }
+    button:hover {
+      background-color: #a3154a;
+      box-shadow: 0 8px 25px rgba(194, 24, 91, 0.6);
+    }
+    @media (max-width: 600px) {
+      main {
+        margin: 30px auto 70px;
+      }
+      header h1 {
+        font-size: 2rem;
+      }
+      h2 {
+        font-size: 1.8rem;
+        padding-bottom: 8px;
+      }
+      .myr-card {
+        flex-direction: column;
+        padding-left: 20px;
+      }
+      .icon {
+        margin: 0 0 15px 0;
+        width: 40px;
+        height: 40px;
+      }
+      button {
+        padding: 14px 36px;
+        font-size: 1.1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Mitos y Realidades sobre el Cáncer de Mama</h1>
+  <p>Información confiable para empoderarte y cuidar tu salud con conocimiento científico.</p>
+</header>
+
+<main>
+  <h2>Descubre la verdad detrás de los mitos más comunes</h2>
+
+  <article class="myr-card mito" aria-label="Mito sobre cáncer de mama">
+    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10
+               10-4.477 10-10S17.523 2 12 2z"/>
+      <path d="M12 7v5" stroke-linecap="round"/>
+      <circle cx="12" cy="17" r="1" />
+    </svg>
+    <div class="myr-text">
+      <div class="label">Mito</div>
+      <h3>El cáncer de mama solo afecta a mujeres mayores</h3>
+      <p>
+        Muchas personas creen que este tipo de cáncer es exclusivo de mujeres adultas o mayores. 
+        Sin embargo, el cáncer de mama puede presentarse en mujeres jóvenes, incluso en sus 20 o 30 años, 
+        y también, aunque con menor frecuencia, en hombres. La edad no es un factor absoluto, por eso es vital la prevención y detección temprana para todas las edades.
+      </p>
+    </div>
+  </article>
+
+  <article class="myr-card realidad" aria-label="Realidad sobre cáncer de mama">
+    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" stroke="#ff4081" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M20 6L9 17l-5-5"/>
+    </svg>
+    <div class="myr-text">
+      <div class="label">Realidad</div>
+      <h3>La detección temprana es clave para salvar vidas</h3>
+      <p>
+        Estudios demuestran que el diagnóstico precoz mediante autoexploración, mamografías periódicas y chequeos médicos aumenta significativamente las probabilidades de un tratamiento exitoso. 
+        No importa la edad, el auto-cuidado y la vigilancia constante pueden marcar la diferencia.
+      </p>
+    </div>
+  </article>
+
+  <article class="myr-card mito" aria-label="Mito sobre cáncer de mama">
+    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <circle cx="12" cy="12" r="10"/>
+      <line x1="15" y1="9" x2="9" y2="15"/>
+      <line x1="9" y1="9" x2="15" y2="15"/>
+    </svg>
+    <div class="myr-text">
+      <div class="label">Mito</div>
+      <h3>Solo las personas con antecedentes familiares tienen riesgo</h3>
+      <p>
+        Si bien tener familiares con cáncer de mama puede aumentar el riesgo, la mayoría de los casos ocurren en personas sin antecedentes familiares conocidos. 
+        Por eso, todas las mujeres y hombres deben mantener hábitos saludables y realizar revisiones periódicas sin confiar únicamente en su historia genética.
+      </p>
+    </div>
+  </article>
+
+  <article class="myr-card realidad" aria-label="Realidad sobre cáncer de mama">
+    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" stroke="#ff4081" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M20 6L9 17l-5-5"/>
+    </svg>
+    <div class="myr-text">
+      <div class="label">Realidad</div>
+      <h3>El estilo de vida influye en la prevención</h3>
+      <p>
+        Una alimentación equilibrada, ejercicio regular, evitar el alcohol y el tabaco, así como mantener un peso saludable, contribuyen a reducir el riesgo de desarrollar cáncer de mama. 
+        Adoptar hábitos sanos es una de las mejores formas de prevención.
+      </p>
+    </div>
+  </article>
+
+  <article class="myr-card mito" aria-label="Mito sobre cáncer de mama">
+    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <path d="M12 2a10 10 0 0 1 10 10"/>
+      <path d="M12 12l8 8"/>
+    </svg>
+    <div class="myr-text">
+      <div class="label">Mito</div>
+      <h3>El cáncer de mama siempre presenta síntomas visibles</h3>
+      <p>
+        El cáncer puede desarrollarse sin dolor ni signos evidentes en etapas iniciales. Por eso, depender solo de síntomas físicos puede retrasar el diagnóstico. 
+        La autoexploración y controles médicos regulares son esenciales para identificar cualquier anomalía a tiempo.
+      </p>
+    </div>
+  </article>
+
+  <article class="myr-card realidad" aria-label="Realidad sobre cáncer de mama">
+    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" stroke="#ff4081" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M20 6L9 17l-5-5"/>
+    </svg>
+    <div class="myr-text">
+      <div class="label">Realidad</div>
+      <h3>Los tratamientos han avanzado y son efectivos</h3>
+      <p>
+        Gracias a la investigación médica, existen múltiples opciones terapéuticas adaptadas a cada caso, que mejoran la calidad de vida y aumentan la tasa de supervivencia. 
+        Consulta siempre con especialistas para acceder al tratamiento más adecuado y personalizado.
+      </p>
+    </div>
+  </article>
+
+  <section class="button-container">
+    <a href="../principal.html"><button>⬅️ Volver al inicio</button></a>
+  </section>
+</main>
+
+</body>
+</html>

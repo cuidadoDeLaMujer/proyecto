@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Información</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      background-color: #fafafa;
+      color: #444;
+      line-height: 1.5;
+      font-size: 14px; /* ligeramente más pequeño */
+    }
+
+    header {
+      background-color: #c2185b;
+      color: white;
+      padding: 22px 15px;
+      text-align: center;
+      box-shadow: 0 3px 8px rgba(194, 24, 91, 0.7);
+    }
+    header h1 {
+      margin: 0 0 8px;
+      font-size: 2.2rem;
+      letter-spacing: 1px;
+      font-weight: 700;
+    }
+    header p {
+      font-size: 1rem;
+      font-weight: 600;
+      opacity: 0.85;
+      margin: 0;
+      font-style: italic;
+    }
+
+    main {
+      max-width: 900px;
+      margin: 40px auto 60px;
+      padding: 0 20px;
+    }
+
+    .article {
+      background: white;
+      border-radius: 12px;
+      padding: 25px 25px 30px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+      margin-bottom: 35px;
+      transition: box-shadow 0.3s ease;
+    }
+    .article:hover {
+      box-shadow: 0 5px 18px rgba(194, 24, 91, 0.15);
+    }
+
+    .article h2 {
+      color: #c2185b;
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+      font-weight: 700;
+      border-bottom: 2px solid #f8bfd4;
+      padding-bottom: 6px;
+      letter-spacing: 0.02em;
+    }
+
+    .article p {
+      margin-bottom: 16px;
+      font-size: 0.95rem;
+      color: #555;
+      font-weight: 500;
+      text-align: justify;
+    }
+
+    .author {
+      font-size: 0.85rem;
+      font-style: italic;
+      color: #888;
+      margin-top: 15px;
+      line-height: 1.3;
+    }
+
+    .read-more {
+      display: inline-block;
+      margin-top: 18px;
+      padding: 10px 22px;
+      background-color: #c2185b;
+      color: white;
+      font-weight: 600;
+      font-size: 0.9rem;
+      border-radius: 12px;
+      text-decoration: none;
+      box-shadow: 0 3px 10px rgba(194, 24, 91, 0.3);
+      transition: background-color 0.3s ease;
+    }
+    .read-more:hover {
+      background-color: #a3164f;
+    }
+
+    .back-button {
+      display: flex;
+      justify-content: center;
+      margin-top: 50px;
+    }
+    .back-button button {
+      background-color: #c2185b;
+      color: white;
+      border: none;
+      padding: 14px 28px;
+      border-radius: 20px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(194, 24, 91, 0.4);
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      user-select: none;
+    }
+    .back-button button:hover {
+      background-color: #a3164f;
+      transform: translateY(-3px);
+    }
+     section.button-container {
+      text-align: center;
+      margin-top: 40px;
+    }
+    button {
+      background-color: #c2185b;
+      color: white;
+      padding: 14px 32px;
+      border: none;
+      border-radius: 12px;
+      font-size: 1.25rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 6px 18px rgba(194, 24, 91, 0.4);
+    }
+    button:hover {
+      background-color: #a3154a;
+      box-shadow: 0 8px 25px rgba(194, 24, 91, 0.6);
+    }
+
+    @media (max-width: 600px) {
+      main {
+        margin: 30px 15px 50px;
+        padding: 0 15px;
+      }
+      header h1 {
+        font-size: 1.8rem;
+      }
+      header p {
+        font-size: 0.9rem;
+      }
+      .article h2 {
+        font-size: 1.3rem;
+      }
+      .article p {
+        font-size: 0.9rem;
+      }
+      .read-more {
+        padding: 9px 20px;
+        font-size: 0.85rem;
+      }
+      .back-button button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Investigaciones</h1>
+    <p>Información confiable y reciente elaborada por expertos.</p>
+  </header>
+
+  <main>
+    <article class="article">
+      <h2>Importancia del Autoexamen de Mamas en la Detección Temprana del Cáncer</h2>
+      <p>El cáncer de mama es la principal causa de muerte por cáncer en mujeres. Detectarlo a tiempo salva vidas y mejora la calidad de vida.</p>
+      <p>Aunque el 90% de los problemas mamarios son benignos, solo el autoexamen mensual puede ayudar a identificar cambios sospechosos antes de que sea tarde.</p>
+      <p>La OMS recomienda combinar el autoexamen con mamografías para lograr una detección precoz, especialmente en poblaciones con menos acceso a servicios médicos.</p>
+      <p>En Cuba, el 25% de los casos se detectan tarde, dificultando el tratamiento. Por eso, ¡conócete, explórate y actúa a tiempo!</p>
+      <div class="author">Dra. Luannys de la Caridad Garau Rivero y Dra. Yaima Labrada García<br />Hospital Oncológico Dr. Celestino Hernández Robau, Cuba</div>
+      <a href="../pdf/pdf01.pdf" class="read-more">Leer más...</a>
+    </article>
+
+    <article class="article">
+      <h2>Cáncer de Mama: Prevalencia, Factores de Riesgo y Signos Clave</h2>
+      <p>El cáncer de mama es el tipo de cáncer más frecuente en el mundo, con prevalencia que puede llegar hasta el 74% en algunas regiones.</p>
+      <p>Entre los signos más comunes para identificarlo están: bultos en la mama, secreción y retracción del pezón, piel con aspecto de cáscara de naranja, y ganglios inflamados en la axila.</p>
+      <p>Los factores de riesgo incluyen obesidad, edad avanzada, nuliparidad, sedentarismo, consumo de alcohol y tabaco, uso de anticonceptivos hormonales, antecedentes familiares y menopausia.</p>
+      <p>Conocer estos factores y signos es vital para la detección temprana y un tratamiento oportuno.</p>
+      <div class="author">Caleb Isaac Chilán Santana y equipo<br />Universidad Estatal del Sur de Manabí, Ecuador</div>
+      <a href="../pdf/pdf02.pdf" class="read-more">Leer más...</a>
+    </article>
+
+    <article class="article">
+      <h2>Factores de Riesgo de Cáncer de Mama en Mujeres Menores de 40 Años</h2>
+      <p>El cáncer de mama es una de las neoplasias con mayor incidencia en México. Aunque las guías se enfocan en mujeres mayores de 40 años, se ha observado un aumento de casos en mujeres menores de esa edad.</p>
+      <p>En un estudio observacional con 43 pacientes diagnosticadas con cáncer de mama, el 19 % eran menores de 40 años y el 9 % tenía antecedentes familiares directos de la enfermedad.</p>
+      <p>La detección temprana y la sensibilización educativa son clave para mejorar el pronóstico, pero en México se diagnostica en etapas más tardías en comparación con países desarrollados. Se recomienda un enfoque multidisciplinario para fortalecer la prevención primaria y secundaria, con especial atención en mujeres jóvenes.</p>
+      <div class="author">Mtra. Imelda Verónica Pérez Guajardo y Dra. Iris Romo Lozano<br />Universidad Autónoma de Nuevo León, México</div>
+      <a href="../pdf/pdf03.pdf" class="read-more">Leer más...</a>
+    </article>
+
+    <section class="button-container">
+    <a href="../principal.html"><button>⬅️ Volver al inicio</button></a>
+  </section>
+  </main>
+</body>
+</html>

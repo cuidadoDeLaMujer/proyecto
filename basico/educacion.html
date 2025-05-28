@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Educación sobre el Cáncer de Mama</title>
+  <style>
+    /* Fuentes y Reset */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      background-color: #f5f5f7;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    /* Encabezado */
+    header {
+      background-color: #c2185b;
+      color: white;
+      padding: 22px 15px;
+      text-align: center;
+      box-shadow: 0 3px 8px rgba(194, 24, 91, 0.7);
+    }
+    header h1 {
+      margin: 0 0 8px;
+      font-size: 2.2rem;
+      letter-spacing: 1px;
+      font-weight: 700;
+    }
+    header p {
+      font-size: 1rem;
+      font-weight: 600;
+      opacity: 0.85;
+      margin: 0;
+      font-style: italic;
+    }
+
+    /* Contenedor principal */
+    main {
+      max-width: 1100px;
+      margin: 40px auto 60px;
+      padding: 0 20px;
+    }
+
+    h2 {
+      color: #c2185b;
+      font-size: 1.9rem;
+      margin-bottom: 20px;
+      border-bottom: 3px solid #f48fb1;
+      padding-bottom: 8px;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+    }
+
+    /* Sección introductoria */
+    .intro {
+      display: flex;
+      flex-wrap: nowrap;
+      gap: 20px;
+      align-items: center;
+      margin-bottom: 50px;
+      background: white;
+      border-radius: 15px;
+      padding: 25px 30px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    }
+    .intro div {
+      flex: 1 1 65%; /* Texto un poco más ancho para compensar imagen más pequeña */
+    }
+    .intro img {
+      flex: 0 0 18%; /* Más pequeña que antes (antes 25%) */
+      max-width: none;
+      height: 180px; /* Más pequeña y proporcionada */
+      border-radius: 15px;
+      box-shadow: 0 6px 18px rgba(194, 24, 91, 0.3);
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+    .intro img:hover {
+      transform: scale(1.05);
+    }
+
+    .highlight {
+      background-color: #fce4ec;
+      color: #880e4f;
+      font-weight: 600;
+      border-left: 6px solid #c2185b;
+      padding: 20px 20px;
+      margin-top: 20px;
+      border-radius: 12px;
+      font-size: 1.1rem;
+    }
+
+    /* Secciones */
+    section.section {
+      background: white;
+      border-radius: 15px;
+      padding: 30px 30px 35px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.07);
+      margin-bottom: 55px;
+    }
+
+    section.section ul {
+      padding-left: 25px;
+      list-style-type: disc;
+      color: #555;
+      font-size: 1.1rem;
+    }
+    section.section ul li {
+      margin-bottom: 12px;
+    }
+
+    /* Imagen síntomas: más grande y centrada */
+    .symptoms-image {
+      display: block;
+      max-width: 450px; /* Más grande que antes (antes 280px) */
+      width: 100%;
+      margin: 0 auto 35px auto;
+      border-radius: 15px;
+      box-shadow: 0 6px 18px rgba(194, 24, 91, 0.3);
+      border: 3px solid #c2185b;
+      object-fit: cover;
+      transition: box-shadow 0.3s ease;
+    }
+    .symptoms-image:hover {
+      box-shadow: 0 8px 28px rgba(194, 24, 91, 0.5);
+    }
+
+    /* Grid para síntomas */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      max-width: 850px;
+      margin: 0 auto;
+      gap: 20px; /* Espacio entre tarjetas */
+    }
+
+    .card {
+      min-height: 130px;
+      padding: 20px 30px;
+       text-align: center;
+      background-color: #fff0f6;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(194, 24, 91, 0.15);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card:hover {
+      transform: translateY(-7px);
+      box-shadow: 0 8px 25px rgba(194, 24, 91, 0.4);
+    }
+    .card p {
+      font-weight: 700;
+      color: #880e4f;
+      font-size: 1.2rem;
+      margin-bottom: 12px;
+    }
+    .card small {
+      font-weight: 400;
+      color: #5c2a44;
+      font-size: 1.02rem;
+      line-height: 1.5;
+    }
+
+    /* Botón */
+    section.button-container {
+      text-align: center;
+      margin-top: 40px;
+    }
+    button {
+      background-color: #c2185b;
+      color: white;
+      padding: 14px 32px;
+      border: none;
+      border-radius: 12px;
+      font-size: 1.25rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 6px 18px rgba(194, 24, 91, 0.4);
+    }
+    button:hover {
+      background-color: #a3154a;
+      box-shadow: 0 8px 25px rgba(194, 24, 91, 0.6);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .intro {
+        flex-direction: column;
+        padding: 20px 15px;
+      }
+      .intro img {
+        flex: none;
+        width: 60%; /* Más visible en móvil */
+        height: auto;
+        margin: 0 auto 20px auto;
+      }
+      main {
+        margin: 20px auto 50px;
+      }
+      .grid {
+        grid-template-columns: 1fr;
+        max-width: 100%;
+      }
+      .symptoms-image {
+        max-width: 100%;
+        margin-bottom: 25px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Educación sobre el Cáncer de Mama</h1>
+  <p>La información puede salvar vidas. Infórmate, compártelo, actúa.</p>
+</header>
+
+<main>
+  <section class="intro">
+    <div>
+      <h2>¿Por qué es importante informarse?</h2>
+      <p>El cáncer de mama es una de las principales causas de muerte en mujeres a nivel mundial. Sin embargo, detectarlo a tiempo aumenta significativamente las posibilidades de tratamiento exitoso.</p>
+      <div class="highlight">
+        🔍 La autoexploración y los chequeos médicos regulares pueden marcar la diferencia, permitiendo detectar anomalías antes de que se presenten síntomas evidentes.
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>🔬 ¿Qué es el cáncer de mama?</h2>
+    <p>Es una enfermedad caracterizada por el crecimiento descontrolado de células en el tejido mamario. Puede afectar a ambos sexos, aunque es mucho más frecuente en mujeres.</p>
+    <ul>
+      <li>Afecta principalmente a mujeres mayores de 40 años, aunque puede presentarse a cualquier edad.</li>
+      <li>Existen varios tipos según la ubicación y características celulares del tumor.</li>
+      <li>El tratamiento varía según el tipo, la etapa en que se diagnostique y la salud general del paciente.</li>
+    </ul>
+  </section>
+
+  <section class="section">
+    <h2>Signos importantes a detectar</h2>
+
+    <img class="symptoms-image" src="../img/Sintomas.jpg" alt="Ilustración cáncer de mama" />
+
+    <div class="grid">
+      <div class="card">
+        <p>Bulto o masa en el seno</p>
+        <small>La aparición de un bulto es uno de los signos más comunes. No todos son malignos, pero es importante hacer evaluación médica temprana para un diagnóstico preciso.</small>
+      </div>
+      <div class="card">
+        <p>Dolor persistente en el seno o axila</p>
+        <small>Un dolor constante y sin causa aparente puede indicar inflamación o presión interna. Si el dolor persiste, debe ser consultado con un especialista.</small>
+      </div>
+      <div class="card">
+        <p>Cambios en la forma o textura del seno</p>
+        <small>Alteraciones como engrosamiento, enrojecimiento o piel con textura de naranja pueden ser señales de alerta que requieren evaluación médica.</small>
+      </div>
+      <div class="card">
+        <p>Retracción del pezón o secreciones</p>
+        <small>Cambios en el pezón o secreciones anormales pueden indicar alteraciones internas. La consulta médica es fundamental para descartar enfermedades.</small>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>🛡️ Prevención y cuidados</h2>
+    <ul>
+      <li>Realiza una autoexploración mamaria mensual para familiarizarte con tu cuerpo y detectar cambios tempranos.</li>
+      <li>Acude a chequeos médicos clínicos periódicos según recomendación profesional.</li>
+      <li>Mantén una dieta balanceada, rica en frutas, verduras y baja en grasas saturadas.</li>
+      <li>Practica actividad física regular para fortalecer el sistema inmunológico y mantener un peso saludable.</li>
+      <li>Evita el consumo de alcohol y tabaco, factores que aumentan el riesgo de cáncer.</li>
+      <li>Infórmate sobre tus antecedentes familiares y comparte esta información con tu médico.</li>
+    </ul>
+  </section>
+
+  <section class="button-container">
+    <a href="../principal.html"><button>⬅️ Volver al inicio</button></a>
+  </section>
+</main>
+
+</body>
+</html>

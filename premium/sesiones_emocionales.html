@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sesiones de Apoyo Emocional</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f5f5f7;
+      color: #333;
+      margin: 0;
+      line-height: 1.6;
+    }
+
+    header {
+      background-color: #c2185b;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      margin: 0;
+    }
+
+    header p {
+      margin: 0.5rem 0 0;
+      font-weight: 500;
+    }
+
+    main {
+      max-width: 1100px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+
+    .intro {
+      display: flex;
+      gap: 2rem;
+      background: white;
+      border-radius: 1rem;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      padding: 2rem;
+      margin-bottom: 2rem;
+    }
+
+
+    .intro img {
+       width: 200px;
+      max-width: 100%;
+      border-radius: 15px;
+      box-shadow: 0 6px 18px rgba(194, 24, 91, 0.3);
+      border: 3px solid #c2185b;
+      margin-bottom: 20px;
+      object-fit: cover;
+      transition: box-shadow 0.3s ease;
+    }
+
+    .intro img:hover {
+      box-shadow: 0 8px 28px rgba(194, 24, 91, 0.5);
+    }
+
+    .highlight {
+       max-width: 100%;
+      background-color: #ffe0ef;
+      padding: 1rem;
+      border-left: 6px solid #c2185b;
+      border-radius: 0.75rem;
+      font-weight: 600;
+      color: #880e4f;
+      margin-top: 1rem;
+    }
+
+    .section {
+      background: white;
+      border-radius: 1rem;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+      padding: 2rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .section h2 {
+      color: #c2185b;
+      border-bottom: 3px solid #f48fb1;
+      padding-bottom: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    ul {
+      padding-left: 1.5rem;
+    }
+
+    ul li {
+      margin-bottom: 0.75rem;
+      font-size: 1.05rem;
+    }
+
+    /* Tarjetas para modalidades */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .card {
+      background-color:  #fce4ec;
+      padding: 1.75rem 1.5rem;
+      border-radius: 1rem;
+      text-align: center;
+      box-shadow: 0 2px 12px rgba(194, 24, 91, 0.25);
+      cursor: pointer;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      font-weight: 600;
+      color: #9c124b;
+      user-select: none;
+    }
+
+    .card:hover {
+      transform: translateY(-7px);
+      box-shadow: 0 8px 25px rgba(194, 24, 91, 0.4);
+    }
+
+    .card p {
+      font-weight: 400;
+      font-size: 0.95rem;
+      margin-top: 0.5rem;
+      color: #7a2a53;
+    }
+
+    /* Contenedor de sesiones detalladas */
+    #sesiones-container {
+      margin-top: 2rem;
+    }
+
+    #sesiones-container h3 {
+      color: #c2185b;
+      margin-bottom: 1rem;
+      font-weight: 700;
+      border-bottom: 2px solid #f48fb1;
+      padding-bottom: 0.25rem;
+    }
+
+    .sessions {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1rem;
+    }
+
+    .session-card {
+      background: #fff0f6;
+      border-radius: 1rem;
+      padding: 1.5rem;
+      box-shadow: 0 3px 12px rgba(194, 24, 91, 0.15);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: box-shadow 0.3s ease;
+    }
+
+    .session-card:hover {
+      box-shadow: 0 8px 30px rgba(194, 24, 91, 0.3);
+    }
+
+    .session-card p {
+      margin: 0.3rem 0;
+      font-size: 1rem;
+      color: #6b2451;
+    }
+
+    .session-card p strong {
+      color: #a91c55;
+    }
+
+    .session-card button {
+      margin-top: 1rem;
+      background-color: #c2185b;
+      color: white;
+      padding: 0.6rem 1.2rem;
+      border: none;
+      border-radius: 0.6rem;
+      font-weight: 700;
+      cursor: pointer;
+      align-self: flex-start;
+      transition: background-color 0.3s ease;
+    }
+
+    .session-card button:hover {
+      background-color: #a3154a;
+    }
+
+    /* Lista de sesiones agendadas dentro de cuadro */
+    .agendadas {
+      background: #fff3f7;
+      padding: 1.5rem 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 2px 10px rgba(194, 24, 91, 0.1);
+      border: 2px solid #c2185b;
+      max-width: 1000%;
+      margin: 0 auto 3rem auto;
+    }
+
+    .agendadas h3 {
+      margin-top: 0;
+      color: #c2185b;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    .agendadas ul {
+      list-style-type: none;
+      padding-left: 0;
+      color: #7a2a53;
+      font-weight: 600;
+      max-height: 300px;
+      overflow-y: auto;
+    }
+
+    .agendadas li {
+      background: white;
+      margin-bottom: 0.8rem;
+      padding: 0.75rem 1rem;
+      border-radius: 0.75rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 1px 4px rgba(194, 24, 91, 0.15);
+    }
+
+    .agendadas li button {
+      background-color: #a3154a;
+      border: none;
+      color: white;
+      font-weight: 700;
+      padding: 0.3rem 0.7rem;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .agendadas li button:hover {
+      background-color: #7b1037;
+    }
+
+    section.button-container {
+      text-align: center;
+      margin-top: 40px;
+      
+    }
+    button {
+      background-color: #c2185b;
+      color: white;
+      padding: 14px 20px;
+      border: none;
+      border-radius: 12px;
+      font-size: 1.09rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 6px 18px rgba(194, 24, 91, 0.4);
+    }
+    button:hover {
+      background-color: #a3154a;
+      box-shadow: 0 8px 25px rgba(194, 24, 91, 0.6);
+    }
+
+    .step img {
+       width: 300px;
+      max-width: 100%;
+      border-radius: 15px;
+      box-shadow: 0 6px 18px rgba(194, 24, 91, 0.3);
+      border: 3px solid #c2185b;
+      margin-bottom: 20px;
+      object-fit: cover;
+      transition: box-shadow 0.3s ease;
+    }
+
+    .step img:hover {
+      box-shadow: 0 8px 28px rgba(194, 24, 91, 0.5);
+    }
+
+    /* Responsive tweaks */
+    @media (max-width: 600px) {
+      .intro {
+        flex-direction: column;
+      }
+      .intro img {
+        width: 100%;
+        max-height: 250px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Sesiones de Apoyo Emocional</h1>
+    <p>Fortalece tu bienestar emocional durante el tratamiento contra el cáncer de mama</p>
+  </header>
+
+  <main>
+    <section class="intro">
+      <img src="../img/img01.jpg" alt="Mujer observándose frente al espejo" />
+      <div>
+        <p>
+          Las sesiones de apoyo emocional son un espacio seguro donde puedes expresar tus sentimientos, resolver dudas y fortalecer tu resiliencia durante el proceso oncológico.
+        </p>
+        <div class="highlight">
+          No estás sola. Juntas enfrentamos este camino con empatía, comprensión y esperanza.
+        </div>
+      </div>
+    </section>
+<section class="section">
+      <h2>¿Qué ofrecemos en estas sesiones?</h2>
+      <ul>
+        <li>Escucha activa y acompañamiento psicológico personalizado.</li>
+        <li>Talleres grupales de expresión emocional.</li>
+        <li>Dinámicas para reducir el estrés y la ansiedad.</li>
+        <li>Apoyo para familiares y cuidadores.</li>
+        <li>Consejería emocional antes, durante y después del tratamiento.</li>
+      </ul>
+    </section>
+    <section class="section">
+      <h2>Modalidades Disponibles</h2>
+      <div class="grid" id="modalidades">
+        <div class="card" data-modalidad="Individual">Individual</div>
+        <div class="card" data-modalidad="Grupal">Grupal</div>
+        <div class="card" data-modalidad="Familiar">Familiar</div>
+      </div>
+    </section>
+
+    <section id="sesiones-container" class="section" style="display:none;">
+      <h2>Sesiones para <span id="modalidad-seleccionada"></span></h2>
+      <div class="sessions" id="sesiones-lista">
+        <!-- Aquí se insertan las sesiones dinámicamente -->
+      </div>
+    </section>
+
+    <section class="agendadas">
+      <h3>Sesiones Agendadas</h3>
+      <table id="tabla-agendadas" style="width: 100%; border-collapse: collapse;text-align: center;">
+        <thead>
+          <tr style="background-color:#c2185b; color:white;">
+            <th style="padding: 8px; border: 1px solid #c2185b;">Modalidad</th>
+            <th style="padding: 8px; border: 1px solid #c2185b;">Fecha</th>
+            <th style="padding: 8px; border: 1px solid #c2185b;">Hora</th>
+            <th style="padding: 8px; border: 1px solid #c2185b;">Lugar/Enlace</th>
+            <th style="padding: 8px; border: 1px solid #c2185b;">Responsable</th>
+            <th style="padding: 8px; border: 1px solid #c2185b;">Eliminar</th>
+          </tr>
+        </thead>
+        <tbody id="cuerpo-tabla-agendadas"></tbody>
+      </table>
+    </section>
+<section class="button-container">
+    <a href="../principal.html"><button>⬅️ Volver al inicio</button></a>
+  </section>
+  </main>
+
+  <script>
+    const sesiones = {
+      Individual: [
+        {
+          fecha: "2025-06-05",
+          hora: "09:00 - 10:00",
+          lugar: "https://meet.jit.si/ApoyoEmocional1",
+          responsable: "Guarniz Gloria"
+        },
+        {
+          fecha: "2025-06-07",
+          hora: "14:00 - 16:00",
+          lugar: "Consultorio 3",
+          responsable: "Aristas Gina"
+        }
+      ],
+      Grupal: [
+        {
+          fecha: "2025-06-10",
+          hora: "10:00 - 11:30",
+          lugar: "https://meet.jit.si/ApoyoEmocional2",
+          responsable: "Aristas Gina"
+        },
+        {
+          fecha: "2025-06-15",
+          hora: "16:00 - 17:30",
+          lugar: "Sala Rosa, 2do piso",
+          responsable: "Castañeda Nayeli"
+        }
+      ],
+      Familiar: [
+        {
+          fecha: "2025-06-12",
+          hora: "11:00 - 12:30",
+          lugar: "https://meet.jit.si/ApoyoEmocional3",
+          responsable: "Guevara Clemifer"
+        },
+        {
+          fecha: "2025-06-18",
+          hora: "15:00 - 17:00",
+          lugar: "Sala Rosa, 4do piso",
+          responsable: "Chigne Gina"
+        }
+      ]
+    };
+
+    let agendadas = [];
+
+ // Al cargar la página, recuperamos las sesiones guardadas en localStorage
+window.onload = () => {
+  const sesionesGuardadas = localStorage.getItem('sesionesAgendadas');
+  if (sesionesGuardadas) {
+    agendadas = JSON.parse(sesionesGuardadas);
+    mostrarAgendadas();
+  }
+};
+
+// Mostrar sesiones agendadas en la tabla
+function mostrarAgendadas() {
+  const tbody = document.getElementById('cuerpo-tabla-agendadas');
+  tbody.innerHTML = '';
+
+  agendadas.forEach((item, index) => {
+    const tr = document.createElement('tr');
+
+    tr.innerHTML = `
+      <td style="padding: 8px; border: 1px solid #c2185b;">${item.modalidad}</td>
+      <td style="padding: 8px; border: 1px solid #c2185b;">${item.fecha}</td>
+      <td style="padding: 8px; border: 1px solid #c2185b;">${item.hora}</td>
+      <td style="padding: 8px; border: 1px solid #c2185b;">${item.lugar}</td>
+      <td style="padding: 8px; border: 1px solid #c2185b;">${item.responsable}</td>
+      <td style="padding: 8px; border: 1px solid #c2185b;">
+        <button 
+            <button 
+              style="
+                 padding: 4px 8px;
+      font-size: 14px;
+      border: none;
+      border-radius: 6px;
+      color: white;
+      cursor: pointer;
+      font-weight: 500;
+      transition: background-color 0.3s ease;
+      display: block;
+      margin: 0 auto;
+      width: fit-content;
+                background-color: #a3154a; 
+              onmouseover="this.style.backgroundColor='#7b1037';"
+              onmouseout="this.style.backgroundColor='#a3154a';"
+              onclick="eliminarSesion(${index})">Eliminar</button>
+          </td>
+    `;
+
+    tbody.appendChild(tr);
+  });
+}
+
+function eliminarSesion(index) {
+  const confirmar = confirm('¿Estás seguro de que quieres eliminar esta sesión agendada?');
+  if (confirmar) {
+    agendadas.splice(index, 1);
+    localStorage.setItem('sesionesAgendadas', JSON.stringify(agendadas));
+    mostrarAgendadas();
+  }
+}
+
+// Función para agregar sesión a agendadas y guardar en localStorage
+function agendarSesion(sesion, modalidad) {
+  // Verificar si ya está agendada
+  const existe = agendadas.some(item =>
+    item.modalidad === modalidad &&
+    item.fecha === sesion.fecha &&
+    item.hora === sesion.hora
+  );
+
+  if (!existe) {
+    agendadas.push({
+      modalidad,
+      fecha: sesion.fecha,
+      hora: sesion.hora,
+      lugar: sesion.lugar,
+      responsable: sesion.responsable
+    });
+
+    localStorage.setItem('sesionesAgendadas', JSON.stringify(agendadas));
+    mostrarAgendadas();
+  } else {
+    alert('Esta sesión ya está agendada.');
+  }
+}
+
+// Ejemplo: agregar eventos a los botones para agendar sesiones
+document.getElementById('modalidades').addEventListener('click', e => {
+  if (e.target.classList.contains('card')) {
+    const modalidad = e.target.getAttribute('data-modalidad');
+    mostrarSesiones(modalidad);
+  }
+});
+
+function mostrarSesiones(modalidad) {
+  const contenedor = document.getElementById('sesiones-container');
+  const lista = document.getElementById('sesiones-lista');
+  lista.innerHTML = '';
+  contenedor.style.display = 'block';
+  document.getElementById('modalidad-seleccionada').textContent = modalidad;
+
+  sesiones[modalidad].forEach(sesion => {
+    const div = document.createElement('div');
+    div.className = 'session-card';
+
+    div.innerHTML = `
+      <p><strong>Fecha:</strong> ${sesion.fecha}</p>
+      <p><strong>Hora:</strong> ${sesion.hora}</p>
+      <p><strong>Lugar/Enlace:</strong> ${sesion.lugar}</p>
+      <p><strong>Responsable:</strong> ${sesion.responsable}</p>
+      <button>Confirmar</button>
+    `;
+
+    const btn = div.querySelector('button');
+    btn.addEventListener('click', () => {
+      agendarSesion(sesion, modalidad);
+    });
+
+    lista.appendChild(div);
+  });
+}
+    
+  </script>
+</body>
+</html>
